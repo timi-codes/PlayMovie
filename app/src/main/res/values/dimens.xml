@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="vertical_spacing">5dp</dimen>
+    <dimen name="lg_keyline">12dp</dimen>
+    <dimen name="default_elevation">8dp</dimen>
+    <dimen name="vertical_margin">16dp</dimen>
+    <dimen name="url_card">42dp</dimen>
+    <dimen name="detail_card">166dp</dimen>
+    <dimen name="md_keylines">16dp</dimen>
+    <dimen name="pl_keylines">12dp</dimen>
+    <dimen name="xlg_keylines">18dp</dimen>
+    <dimen name="labels_">16sp</dimen>
+    <dimen name="username_labels_">20sp</dimen>
+</resources>

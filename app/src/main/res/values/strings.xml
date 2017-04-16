@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">PlayMovie</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_sort_by_popular">Popular</string>
+    <string name="action_sort_by_ratings">Ratings</string>
+    <!--Create an apikey from TMDB and insert in between the tags-->
+    <string name="api_key" ></string>
+    <string name="preference">sharedpref</string>
+    <string name="sort_type">sortingtype</string>
+    <string name="top_rated">top_rated</string>
+    <string name="popular">popular</string>
+    <string name="title_top_rated">Top Rated</string>
+    <string name="title_popular_movies">Most Popular</string>
+    <string name="no_data_error">Nothing to Show</string>
+    <string name="genre">Animation | Comedy | Family</string>
+    <string name="title">Despicable Me</string>
+    <string name="duration">1h 46m</string>
+    <string name="release_date">March 21, 2016 (USA)</string>
+    <string name="ratings_text">7.2</string>
+    <string name="ratings"> /10</string>
+    <string name="text_overview">Overview</string>
+    <string name="overview">Google Developer Expert.Pushing World Class content @AuthO . Making impact @goodheads &amp; @cloudinary.</string>
+    <string name="movietitle">TITLE</string>
+    <string name="movieposter">POSTER</string>
+    <string name="movieoverview">OVERVIEW</string>
+    <string name="movierating">RATING</string>
+    <string name="moviereleasedate">RELEASEDATE</string>
+    <string name="moviegenre">GENRE</string>
+    <string name="backdrop">backdrop</string>
+    <string name="overviews">OVERVIEW</string>
+
+
+
+</resources>

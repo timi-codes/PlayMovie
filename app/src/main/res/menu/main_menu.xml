@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <group
+        android:checkableBehavior="single"
+        android:visible="true">
+        <item android:id="@+id/menu_sort_by_poplar"
+            android:title="@string/action_sort_by_popular"
+            android:checked="true"/>
+        <item android:id="@+id/menu_sort_by_ratings"
+            android:title="@string/action_sort_by_ratings"/>
+    </group>
+</menu>
