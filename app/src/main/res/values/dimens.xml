@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="vertical_spacing">5dp</dimen>
-    <dimen name="lg_keyline">12dp</dimen>
+    <dimen name="lg_keyline">15dp</dimen>
     <dimen name="default_elevation">8dp</dimen>
     <dimen name="vertical_margin">16dp</dimen>
     <dimen name="url_card">42dp</dimen>
     <dimen name="detail_card">166dp</dimen>
     <dimen name="md_keylines">16dp</dimen>
     <dimen name="pl_keylines">12dp</dimen>
-    <dimen name="xlg_keylines">18dp</dimen>
-    <dimen name="labels_">16sp</dimen>
-    <dimen name="username_labels_">20sp</dimen>
+    <dimen name="movie_title_text_size">18sp</dimen>
+    <dimen name="synopsis_text_size">16sp</dimen>
+    <dimen name="synopsis_top_margin">20dp</dimen>
+    <dimen name="other_text_size">13sp</dimen>
+    <dimen name="colapsebar_height">240sp</dimen>
+    <dimen name="nestedscroll_top">170dp</dimen>
+    <dimen name="card_corner">3dp</dimen>
+    <dimen name="poster_thumbnail_width">70dp</dimen>
+    <dimen name="poster_thumbnail_height">100dp</dimen>
+    <dimen name="releasedate_top">13dp</dimen>
+
+
 </resources>

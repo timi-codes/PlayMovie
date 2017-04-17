@@ -6,7 +6,7 @@
     <group
         android:checkableBehavior="single"
         android:visible="true">
-        <item android:id="@+id/menu_sort_by_poplar"
+        <item android:id="@+id/menu_sort_by_popular"
             android:title="@string/action_sort_by_popular"
             android:checked="true"/>
         <item android:id="@+id/menu_sort_by_ratings"

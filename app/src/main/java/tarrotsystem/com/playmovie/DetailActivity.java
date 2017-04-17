@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pttextview.widget.PTTextView;
+import tarrotsystem.com.playmovie.utilities.JSONObjectUtil;
 import tarrotsystem.com.playmovie.utilities.NetworkUtils;
 import tarrotsystem.com.playmovie.utilities.GenUtils;
 
@@ -20,71 +23,54 @@ import tarrotsystem.com.playmovie.utilities.GenUtils;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private PTTextView title;
-    private PTTextView genre;
-    private TextView releaseDate;
-    private TextView elapseTime;
-    private TextView ratings;
-    private TextView overview;
+    @BindView(R.id.movie_title) PTTextView title;
+    @BindView(R.id.genre) PTTextView genre;
+    @BindView(R.id.release_date) TextView releaseDate;
+    @BindView(R.id.ratings) TextView ratings;
+    @BindView(R.id.overview) TextView overview;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.poster_img) ImageView posterImage;
+    @BindView(R.id.backdrop) ImageView backDrop;
 
-    private Toolbar toolbar;
-
-
-    private ImageView posterImage,backDrop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        title = (PTTextView)findViewById ( R.id.movie_title);
-        genre = (PTTextView)findViewById ( R.id.genre);
-        releaseDate = (TextView)findViewById ( R.id.release_date);
-        elapseTime = (TextView)findViewById ( R.id.elapse_time);
-        overview = (TextView)findViewById ( R.id.overview);
-
-        ratings = (TextView)findViewById ( R.id.ratings);
-        posterImage = (ImageView)findViewById ( R.id.poster_img);
-        backDrop = (ImageView)findViewById ( R.id.backdrop);
-
         initView();
-
     }
 
     private void initView() {
         Intent intent=getIntent();
-        String movieTitle,movieReleaseDate,movieRatings,overView;
 
-        if (intent.hasExtra(getString(R.string.movieposter))){
-            movieTitle = intent.getStringExtra(getString(R.string.movietitle));
-            movieReleaseDate = intent.getStringExtra(getString(R.string.moviereleasedate));
-            movieRatings = intent.getStringExtra(getString(R.string.movierating));
-            overView = intent.getStringExtra(getString(R.string.overviews));
+        if (intent.hasExtra(getString(R.string.movie))){
+            JSONObjectUtil.JSONResponse response = intent.getParcelableExtra(getString(R.string.movie));
 
-            int[] genreiD = intent.getIntArrayExtra(getString(R.string.moviegenre));
-            genre.setText(GenUtils.genreName(genreiD));
-            title.setText(movieTitle);
+            genre.setText(GenUtils.genreName(response.getGenre_ids()));
+            title.setText(response.getOriginal_title());
 
 
-            releaseDate.setText(GenUtils.formatReleaseDate(movieReleaseDate));
-            ratings.setText(movieRatings);
-            overview.setText(overView);
+            releaseDate.setText(GenUtils.formatReleaseDate(response.getRelease_date()));
+            ratings.setText(response.getVote_average());
+            overview.setText(response.getOverview());
 
 
 
-            String imageUrl = NetworkUtils.POSTER_BASE_URL + intent.getStringExtra(getString(R.string.movieposter));
+            String imageUrl = NetworkUtils.POSTER_BASE_URL + response.getPoster_path();
             Glide.with(this)
                     .load(imageUrl)
                     .centerCrop()
                     .into(posterImage);
 
-            String backDropUrl = NetworkUtils.BACKDROP_BASE_URL + intent.getStringExtra(getString(R.string.backdrop));
+            String backDropUrl = NetworkUtils.BACKDROP_BASE_URL + response.getBackdrop_path();
             Glide.with(this)
                     .load(backDropUrl)
                     .centerCrop()

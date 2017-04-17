@@ -4,7 +4,7 @@
     <string name="action_sort_by_popular">Popular</string>
     <string name="action_sort_by_ratings">Ratings</string>
     <!--Create an apikey from TMDB and insert in between the tags-->
-    <string name="api_key" ></string>
+    <string name="api_key"></string>
     <string name="preference">sharedpref</string>
     <string name="sort_type">sortingtype</string>
     <string name="top_rated">top_rated</string>
@@ -28,7 +28,7 @@
     <string name="moviegenre">GENRE</string>
     <string name="backdrop">backdrop</string>
     <string name="overviews">OVERVIEW</string>
-
+    <string name="movie">MOVIE</string>
 
 
 </resources>

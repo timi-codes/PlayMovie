@@ -1,5 +1,8 @@
 package tarrotsystem.com.playmovie.utilities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +64,7 @@ public class JSONObjectUtil {
 
     @SuppressWarnings("serial")
 
-    public class JSONResponse implements Serializable{
+    public static class JSONResponse implements Parcelable {
         private String original_title;
         private String poster_path;
         private String overview;
@@ -70,6 +73,8 @@ public class JSONObjectUtil {
         private int id;
         private int [] genre_ids;
         private String backdrop_path;
+
+
 
         public String getOriginal_title() {
             return original_title;
@@ -135,6 +140,48 @@ public class JSONObjectUtil {
             this.backdrop_path = backdrop_path;
         }
 
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.original_title);
+            dest.writeString(this.poster_path);
+            dest.writeString(this.overview);
+            dest.writeString(this.vote_average);
+            dest.writeString(this.release_date);
+            dest.writeInt(this.id);
+            dest.writeIntArray(this.genre_ids);
+            dest.writeString(this.backdrop_path);
+        }
+
+        public JSONResponse() {
+        }
+
+        public JSONResponse(Parcel in) {
+            this.original_title = in.readString();
+            this.poster_path = in.readString();
+            this.overview = in.readString();
+            this.vote_average = in.readString();
+            this.release_date = in.readString();
+            this.id = in.readInt();
+            this.genre_ids = in.createIntArray();
+            this.backdrop_path = in.readString();
+        }
+
+        public static final Parcelable.Creator<JSONResponse> CREATOR = new Parcelable.Creator<JSONResponse>() {
+            @Override
+            public JSONResponse createFromParcel(Parcel source) {
+                return new JSONResponse(source);
+            }
+
+            @Override
+            public JSONResponse[] newArray(int size) {
+                return new JSONResponse[size];
+            }
+        };
     }
 
 }

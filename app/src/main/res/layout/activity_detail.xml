@@ -18,7 +18,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="@dimen/colapsebar_height"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:contentScrim="?attr/colorPrimary"
@@ -29,7 +29,7 @@
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/backdrop_placeholder"
+                tools:background="@drawable/backdrop_placeholder"
                 android:contentDescription="@string/backdrop"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
@@ -42,50 +42,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-                android:title="    "
+                android:title=""
                 app:layout_collapseMode="pin" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/nestedscroll_top"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardview"
-        android:layout_marginTop="170dp"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end"
-        app:cardBackgroundColor="@android:color/white">
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/synopsis_top_margin"
+        android:layout_marginRight="@dimen/synopsis_top_margin"
+        android:layout_marginLeft="@dimen/synopsis_top_margin"
+        android:layout_marginStart="@dimen/synopsis_top_margin"
+        android:layout_marginBottom="@dimen/synopsis_top_margin"
+        app:cardBackgroundColor="@color/colorPrimary">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="13dp"
-            android:paddingRight="13dp">
+            android:paddingTop="@dimen/lg_keyline"
+            android:paddingBottom="@dimen/synopsis_top_margin"
+            android:paddingLeft="@dimen/lg_keyline"
+            android:paddingRight="@dimen/lg_keyline">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/movie_img"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/poster_thumbnail_width"
+                android:layout_height="@dimen/poster_thumbnail_height"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginEnd="12dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginEnd="@dimen/pl_keylines"
+                android:layout_marginRight="@dimen/pl_keylines"
                 android:adjustViewBounds="true"
-                card_view:cardCornerRadius="3dp">
+                card_view:cardCornerRadius="@dimen/card_corner">
                 <ImageView
                     android:id="@+id/poster_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/image_poster" />
+                    tools:src="@drawable/image_poster" />
             </android.support.v7.widget.CardView>
 
             <!--MovieTitle-->
@@ -93,9 +94,9 @@
                 android:id="@+id/movie_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
+                tools:text="@string/title"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/movie_title_text_size"
                 app:typeface="pt_sans_narrow_bold"
                 android:layout_alignTop="@+id/movie_img"
                 android:layout_toRightOf="@+id/movie_img"
@@ -106,10 +107,10 @@
                 android:id="@+id/genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/genre"
+                tools:text="@string/genre"
                 android:textColor="@color/colorLightGrey"
-                android:textSize="13sp"
-                android:layout_marginTop="2dp"
+                android:textSize="@dimen/other_text_size"
+                android:layout_marginTop="@dimen/card_corner"
                 android:layout_toRightOf="@+id/movie_img"
                 android:layout_toEndOf="@+id/movie_img"
                 android:layout_below="@+id/movie_title"
@@ -120,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/genre"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="@dimen/releasedate_top"
                 android:orientation="horizontal"
                 android:layout_toRightOf="@+id/movie_img"
                 android:layout_toEndOf="@+id/movie_img">
@@ -128,18 +129,18 @@
                     android:id="@+id/release_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/release_date"
+                    tools:text="@string/release_date"
                     android:textColor="@color/colorLightGrey"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/other_text_size"
                     />
                 <TextView
                     android:id="@+id/elapse_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/duration"
-                    android:layout_marginLeft="5dp"
+                    tools:text="@string/duration"
+                    android:layout_marginLeft="@dimen/vertical_spacing"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/other_text_size"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -148,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dated"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/vertical_spacing"
                 android:orientation="horizontal"
                 android:layout_toEndOf="@+id/movie_img"
                 android:layout_toRightOf="@+id/movie_img">
@@ -156,23 +157,23 @@
                     android:id="@+id/ratings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ratings_text"
+                    tools:text="@string/ratings_text"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/other_text_size"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/overrall_ratings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ratings"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/other_text_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/synopsis_top_margin"
                 android:layout_below="@+id/movie_img">
 
                 <TextView
@@ -180,29 +181,21 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/md_keylines"
                     android:text="@string/text_overview"
-                    android:textSize="@dimen/labels_"
+                    android:textSize="@dimen/synopsis_text_size"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:text="@string/overview"
+                    android:paddingTop="@dimen/vertical_spacing"
+                    tools:text="@string/overview"
                     android:textColor="@color/colorLightGrey"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/other_text_size" />
 
             </LinearLayout>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
     </android.support.v4.widget.NestedScrollView>
-
-
 </android.support.design.widget.CoordinatorLayout>

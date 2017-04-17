@@ -15,7 +15,7 @@ import tarrotsystem.com.playmovie.R;
 public class GenUtils {
     public static String getSortOrder(Context vcontext){
         SharedPreferences shared = vcontext.getSharedPreferences(vcontext.getString(R.string.preference),Context.MODE_PRIVATE);
-        return shared.getString(vcontext.getString(R.string.sort_type),vcontext.getString(R.string.action_sort_by_popular));
+        return shared.getString(vcontext.getString(R.string.sort_type),vcontext.getString(R.string.popular));
     }
 
     public static void setSortOrder(Context context,String sorttype){

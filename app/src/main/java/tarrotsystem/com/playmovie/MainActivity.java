@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        if(GenUtils.getSortOrder(this)!= getString(R.string.popular))
+        if(!GenUtils.getSortOrder(this).equals(getString(R.string.popular)))
             menu.findItem(R.id.menu_sort_by_ratings).setChecked(true);
         return true;
     }
@@ -92,11 +92,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         switch (itemId) {
-            case R.id.menu_sort_by_poplar:
+            case R.id.menu_sort_by_popular:
                 if (item.isChecked()) item.setChecked(true);
-                else item.setChecked(true);
-                GenUtils.setSortOrder(this,getString(R.string.popular));
-                loadMovies(getResources().getString(R.string.popular));
+                else
+                    item.setChecked(true);
+                    GenUtils.setSortOrder(this,getString(R.string.popular));
+                    loadMovies(getResources().getString(R.string.popular));
                 return true;
             case R.id.menu_sort_by_ratings:
                 if (item.isChecked()) item.setChecked(true);
@@ -114,14 +115,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public void onItemClicked(JSONObjectUtil.JSONResponse response) {
         Intent intent = new Intent(this,DetailActivity.class);
-        intent.putExtra(getString(R.string.movietitle),response.getOriginal_title());
-        intent.putExtra(getString(R.string.movieposter),response.getPoster_path());
-        intent.putExtra(getString(R.string.movieoverview),response.getOverview());
-        intent.putExtra(getString(R.string.movierating),response.getVote_average());
-        intent.putExtra(getString(R.string.moviereleasedate),response.getRelease_date());
-        intent.putExtra(getString(R.string.backdrop),response.getBackdrop_path());
-        intent.putExtra(getString(R.string.moviegenre),response.getGenre_ids());
-        intent.putExtra(getString(R.string.overviews),response.getOverview());
+        intent.putExtra("MOVIE",response);
         startActivity(intent);
     }
 
