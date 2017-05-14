@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity"
+        <activity android:name=".view.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,17 +18,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".view.MainActivity"
             android:theme="@style/AppTheme"
             android:launchMode="singleTop">
         </activity>
 
-        <activity android:name=".DetailActivity"
+        <activity android:name=".view.DetailActivity"
             android:theme="@style/DetailTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".view.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="tarrotsystem.com.playmovie.MainActivity"/>
+                android:value="tarrotsystem.com.playmovie.view.MainActivity"/>
         </activity>
 
     </application>

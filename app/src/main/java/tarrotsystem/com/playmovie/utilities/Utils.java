@@ -2,6 +2,8 @@ package tarrotsystem.com.playmovie.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.util.TypedValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +14,9 @@ import tarrotsystem.com.playmovie.R;
  * Created by DOTECH on 15/04/2017.
  */
 
-public class GenUtils {
+public class Utils {
+    public static final String Google_Key = "AIzaSyCUXOiFGNCO1QOzLIpj3nZaJ8zyTkpERlc";
+
     public static String getSortOrder(Context vcontext){
         SharedPreferences shared = vcontext.getSharedPreferences(vcontext.getString(R.string.preference),Context.MODE_PRIVATE);
         return shared.getString(vcontext.getString(R.string.sort_type),vcontext.getString(R.string.popular));
@@ -83,5 +87,14 @@ public class GenUtils {
         }
         SimpleDateFormat postFormatter = new SimpleDateFormat("MMM dd, yyyy");
         return  postFormatter.format(convertedDate);
+    }
+
+    public static int dpToPx(float dp, Context context) {
+        return dpToPx(dp, context.getResources());
+    }
+
+    public static int dpToPx(float dp, Resources resources) {
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
+        return (int) px;
     }
 }

@@ -1,5 +1,6 @@
 package tarrotsystem.com.playmovie.utilities;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,6 +12,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import tarrotsystem.com.playmovie.database.MovieContract;
+
 /**
  * Created by DOTECH on 15/04/2017.
  */
@@ -18,6 +21,7 @@ import java.util.List;
 public class JSONObjectUtil {
     private static final String RESULT = "results";
     private static final String ID = "id";
+    private static final String KEY = "key";
     private static final String BACKDROP = "backdrop_path";
     private static final String GENEREID = "genre_ids";
     private static final String ORIGINALTITLE = "original_title";
@@ -26,16 +30,17 @@ public class JSONObjectUtil {
     private static final String RELEASEDATE = "release_date";
     private static final String VOTEAVERAGE = "vote_average";
 
-    private List<JSONResponse> parsedMovies;
-    private JSONResponse response;
+    private List<Movies> parsedMovies;
+    private Movies response;
 
-    public  List<JSONResponse> getMovieListFromJSonResponse(String jsonResponse) throws JSONException {
+
+    public  List<Movies> getMovieListFromJSonResponse(String jsonResponse) throws JSONException {
         JSONObject object = new JSONObject(jsonResponse);
         JSONArray data = object.getJSONArray(RESULT);
         parsedMovies = new ArrayList<>();
         for(int i= 0; i<data.length(); i++){
             JSONObject moviedata = (JSONObject)data.get(i);
-            response = new JSONResponse();
+            response = new Movies();
 
             response.setId(moviedata.getInt(ID));
             response.setBackdrop_path(moviedata.getString(BACKDROP));
@@ -62,9 +67,31 @@ public class JSONObjectUtil {
         return  parsedMovies;
     }
 
+
+
+    public  List<Movies> getMovieListFromCursor(Cursor cursor) throws JSONException {
+        parsedMovies = new ArrayList<>();
+        while (cursor.moveToNext()){
+            response = new Movies();
+            response.setId(cursor.getInt(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_ID)));
+            response.setOriginal_title(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_TITLE)));
+            response.setOverview(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_OVERVIEW)));
+            response.setPoster_path(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_POSTER)));
+            response.setRelease_date(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_RELEASEDATE)));
+            response.setVote_average(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_VOTEAVERAGE)));
+            response.setBackdrop_path(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.FavoriteEntry.COLUMN_BACKDROP)));
+
+            parsedMovies.add(response);
+
+        }
+
+        return  parsedMovies;
+    }
+
+
     @SuppressWarnings("serial")
 
-    public static class JSONResponse implements Parcelable {
+    public static class Movies implements Parcelable {
         private String original_title;
         private String poster_path;
         private String overview;
@@ -73,6 +100,7 @@ public class JSONObjectUtil {
         private int id;
         private int [] genre_ids;
         private String backdrop_path;
+        private boolean favorite = false;
 
 
 
@@ -140,6 +168,14 @@ public class JSONObjectUtil {
             this.backdrop_path = backdrop_path;
         }
 
+        public boolean isFavorite() {
+            return favorite;
+        }
+
+        public void setFavorite(boolean favorite) {
+            this.favorite = favorite;
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -153,33 +189,38 @@ public class JSONObjectUtil {
             dest.writeString(this.vote_average);
             dest.writeString(this.release_date);
             dest.writeInt(this.id);
+            //dest.writeByte((byte) (video ? 1 : 0));
             dest.writeIntArray(this.genre_ids);
             dest.writeString(this.backdrop_path);
+            dest.writeByte((byte) (favorite ? 1 : 0));
+
         }
 
-        public JSONResponse() {
+        public Movies() {
         }
 
-        public JSONResponse(Parcel in) {
+        public Movies(Parcel in) {
             this.original_title = in.readString();
             this.poster_path = in.readString();
             this.overview = in.readString();
+            //video = in.readByte()!=0;
             this.vote_average = in.readString();
             this.release_date = in.readString();
             this.id = in.readInt();
             this.genre_ids = in.createIntArray();
             this.backdrop_path = in.readString();
+            favorite = in.readByte()!=0;
         }
 
-        public static final Parcelable.Creator<JSONResponse> CREATOR = new Parcelable.Creator<JSONResponse>() {
+        public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
             @Override
-            public JSONResponse createFromParcel(Parcel source) {
-                return new JSONResponse(source);
+            public Movies createFromParcel(Parcel source) {
+                return new Movies(source);
             }
 
             @Override
-            public JSONResponse[] newArray(int size) {
-                return new JSONResponse[size];
+            public Movies[] newArray(int size) {
+                return new Movies[size];
             }
         };
     }

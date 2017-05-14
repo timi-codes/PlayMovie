@@ -1,4 +1,4 @@
-package tarrotsystem.com.playmovie;
+package tarrotsystem.com.playmovie.view;
 
 import android.content.Intent;
 import android.os.Bundle;

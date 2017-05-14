@@ -22,6 +22,8 @@ public class NetworkUtils {
     public static String POSTER_BASE_URL = IMAGE_BASE_URL+"w185/";
     public static String BACKDROP_BASE_URL=IMAGE_BASE_URL+"w780/";
     private static String PARAM_QUERY = "api_key";
+    public static String TAG_MOVIES = "MOVIES";
+
 
 
     /**
@@ -43,6 +45,23 @@ public class NetworkUtils {
             e.printStackTrace();
         }
 
+        return url;
+    }
+
+
+    public static URL buildVideoReviewUrl(String id,String type,String apikey) {
+        Uri builtUri = Uri.parse(TMDB_BASE_URL).buildUpon()
+                .appendEncodedPath(id)
+                .appendEncodedPath(type)
+                .appendQueryParameter(PARAM_QUERY, apikey)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return url;
     }
 

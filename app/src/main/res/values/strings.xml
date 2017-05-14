@@ -4,11 +4,12 @@
     <string name="action_sort_by_popular">Popular</string>
     <string name="action_sort_by_ratings">Ratings</string>
     <!--Create an apikey from TMDB and insert in between the tags-->
-    <string name="api_key"></string>
+    <string name="api_key">7064a79ca970f2948cfb253eaf51aabf</string>
     <string name="preference">sharedpref</string>
     <string name="sort_type">sortingtype</string>
     <string name="top_rated">top_rated</string>
     <string name="popular">popular</string>
+    <string name="favorite">favorite</string>
     <string name="title_top_rated">Top Rated</string>
     <string name="title_popular_movies">Most Popular</string>
     <string name="no_data_error">Nothing to Show</string>
@@ -18,7 +19,7 @@
     <string name="release_date">March 21, 2016 (USA)</string>
     <string name="ratings_text">7.2</string>
     <string name="ratings"> /10</string>
-    <string name="text_overview">Overview</string>
+    <string name="text_overview">Synopsis</string>
     <string name="overview">Google Developer Expert.Pushing World Class content @AuthO . Making impact @goodheads &amp; @cloudinary.</string>
     <string name="movietitle">TITLE</string>
     <string name="movieposter">POSTER</string>
@@ -29,6 +30,14 @@
     <string name="backdrop">backdrop</string>
     <string name="overviews">OVERVIEW</string>
     <string name="movie">MOVIE</string>
+    <string name="action_sort_by_favorites">Favorite</string>
+    <string name="PARAM">PARAM</string>
+    <string name="video">videos</string>
+    <string name="trailer">TRAILER</string>
+    <string name="player_error">Error initializing YouTube player</string>
 
 
+
+    <string name="added_favorite">Saved to favorites</string>
+    <string name="removed_favorite">Removed from favorites</string>
 </resources>

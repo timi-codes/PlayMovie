@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#ff5e5e</color>
     <color name="colorAccent">#ff5e5e</color>
     <color name="colorLightGrey">#b4b3b3</color>
-    <color name="colorBlack">   @android:color/black</color>
+    <color name="colorBlack">@android:color/black</color>
+    <color name="colorHaiti">#131722</color>
+    <color name="secondaryText">#727272</color>
+    <color name="colorVien">#f9f8f8</color>
 
 </resources>

@@ -1,4 +1,4 @@
-package tarrotsystem.com.playmovie;
+package tarrotsystem.com.playmovie.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import tarrotsystem.com.playmovie.R;
 import tarrotsystem.com.playmovie.utilities.JSONObjectUtil;
 import tarrotsystem.com.playmovie.utilities.NetworkUtils;
 
@@ -20,7 +21,7 @@ import tarrotsystem.com.playmovie.utilities.NetworkUtils;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
     private MovieAdapterOnClickListener mClickListener;
-    private List<JSONObjectUtil.JSONResponse> movieList;
+    private List<JSONObjectUtil.Movies> movieList;
     private Context mContext;
 
     public MovieAdapter(Context context,MovieAdapterOnClickListener clickListener){
@@ -44,7 +45,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Glide.with(mContext)
                 .load(imageUrl)
                 .centerCrop()
-                .placeholder(R.drawable.movie_placeholder)
+                .placeholder(R.drawable.placeholder)
                 .error(android.R.drawable.stat_notify_error)
                 .into(holder.movieThumbnail);
     }
@@ -70,12 +71,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
     }
 
-    public void setMovieData(List<JSONObjectUtil.JSONResponse> movielist){
+    public void setMovieData(List<JSONObjectUtil.Movies> movielist){
         this.movieList = movielist;
         notifyDataSetChanged();
     }
 
     public interface MovieAdapterOnClickListener{
-        void onItemClicked(JSONObjectUtil.JSONResponse response);
+        void onItemClicked(JSONObjectUtil.Movies response);
     }
 }
