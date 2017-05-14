@@ -24,7 +24,7 @@ public class Trailer implements Parcelable {
     private String size;
     private String type;
 
-    private List<Trailer>parsedTrailer;
+    private List<Trailer> parsedTrailer;
     private Trailer trailerresponse;
     private static final String RESULT = "results";
     private static final String ID = "id";
@@ -144,15 +144,15 @@ public class Trailer implements Parcelable {
         JSONObject object = new JSONObject(jsonResponse);
         JSONArray data = object.getJSONArray(RESULT);
         parsedTrailer = new ArrayList<>();
-        for(int i= 0; i<data.length(); i++){
-            JSONObject trailerdata = (JSONObject)data.get(i);
+        for (int i = 0; i < data.length(); i++) {
+            JSONObject trailerdata = (JSONObject) data.get(i);
             trailerresponse = new Trailer();
 
             trailerresponse.setId(trailerdata.getString(ID));
             trailerresponse.setKey(trailerdata.getString(KEY));
             parsedTrailer.add(trailerresponse);
         }
-        return  parsedTrailer;
+        return parsedTrailer;
     }
 
 }

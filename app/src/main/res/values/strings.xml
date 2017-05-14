@@ -10,6 +10,7 @@
     <string name="top_rated">top_rated</string>
     <string name="popular">popular</string>
     <string name="favorite">favorite</string>
+    <string name="title_favorite">Favorite</string>
     <string name="title_top_rated">Top Rated</string>
     <string name="title_popular_movies">Most Popular</string>
     <string name="no_data_error">Nothing to Show</string>

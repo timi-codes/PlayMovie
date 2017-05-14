@@ -27,14 +27,18 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
     private List<MovieReviews> mFeedList;
     private Context mContext;
 
-    public ReviewsAdapter(List<MovieReviews> feedList, Context context) {
-        this.mFeedList = feedList;
+    public ReviewsAdapter(Context context) {
         this.mContext = context;
+    }
+
+    public void setReviewlistData(List<MovieReviews> feedList){
+        this.mFeedList = feedList;
+        notifyDataSetChanged();
     }
 
     @Override
     public ReviewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext(), R.layout.item_video, null);
+        View view = View.inflate(parent.getContext(), R.layout.item_review, null);
         return new ReviewsViewHolder(view);
     }
 

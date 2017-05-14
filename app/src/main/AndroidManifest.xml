@@ -31,6 +31,12 @@
                 android:value="tarrotsystem.com.playmovie.view.MainActivity"/>
         </activity>
 
+        <provider
+            android:name=".database.MovieContentProvider"
+            android:authorities="com.tarrotsystem.playmovie"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>

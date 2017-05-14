@@ -100,7 +100,7 @@ public class JSONObjectUtil {
         private int id;
         private int [] genre_ids;
         private String backdrop_path;
-        private boolean favorite = false;
+        private boolean favorite ;
 
 
 

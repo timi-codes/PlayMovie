@@ -110,15 +110,21 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             getSupportActionBar().setTitle(getString(R.string.title_popular_movies));
         else if(sortType.equals(getString(R.string.top_rated)))
             getSupportActionBar().setTitle(getString(R.string.title_top_rated));
+        else if (sortType.equals(getString(R.string.favorite)))
+            getSupportActionBar().setTitle(getString(R.string.title_favorite));
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        if(!Utils.getSortOrder(this).equals(getString(R.string.popular)))
-            menu.findItem(R.id.menu_sort_by_ratings).setChecked(true);
-        return true;
+        if(!Utils.getSortOrder(this).equals(getString(R.string.popular)) &&
+                !Utils.getSortOrder(this).equals(getString(R.string.top_rated))){
+            menu.findItem(R.id.menu_sort_by_favorite).setChecked(true);
+        }
+
+            return true;
     }
 
 
@@ -146,6 +152,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 Utils.setSortOrder(this,getString(R.string.top_rated));
                 loadMovies(getResources().getString(R.string.top_rated));
                 return true;
+            case R.id.menu_sort_by_favorite:
+                if (item.isChecked()) item.setChecked(true);
+                else item.setChecked(true);
+                Utils.setSortOrder(this,getString(R.string.favorite));
+                loadMovies(getResources().getString(R.string.favorite));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -162,7 +174,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public Loader<List<JSONObjectUtil.Movies>> onCreateLoader(int id, Bundle args) {
+
         final String params[] = args.getStringArray(getString(R.string.PARAM));
+
         return new AsyncTaskLoader<List<JSONObjectUtil.Movies>>(this) {
             @Override
             protected void onStartLoading() {
@@ -183,13 +197,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 try {
                     if(!sortorder.equals(getString(R.string.favorite))){
                         String movieResponse = NetworkUtils.getResponseFromHttpUrl(movieRequestURL);
-                        List<JSONObjectUtil.Movies> MovieJSONResponse = new JSONObjectUtil().getMovieListFromJSonResponse( movieResponse);
-                        return MovieJSONResponse;
+                        List<JSONObjectUtil.Movies> moviesResponse = new JSONObjectUtil().getMovieListFromJSonResponse( movieResponse);
+                        return moviesResponse;
                     }
                     else{
                         Cursor cursor = getContentResolver().query(CONTENT_URI,null,null,null,null);
-                        List<JSONObjectUtil.Movies> MovieJSONResponse = new JSONObjectUtil().getMovieListFromCursor( cursor);
-                        return MovieJSONResponse;
+                        List<JSONObjectUtil.Movies> moviesResponse = new JSONObjectUtil().getMovieListFromCursor( cursor);
+                        Log.d("PARAM",moviesResponse.toString());
+                        return moviesResponse;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -207,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         } else {
             empty_view.setVisibility(View.VISIBLE);
             movie_list.setVisibility(View.GONE);
-            showSnackBar();
+           // showSnackBar();
         }
     }
 

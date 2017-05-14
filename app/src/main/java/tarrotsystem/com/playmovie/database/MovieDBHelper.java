@@ -17,7 +17,7 @@ public class MovieDBHelper extends SQLiteOpenHelper {
 
     final String SQL_CREATE_FAVORITE_TABLE =  "CREATE TABLE " + MovieContract.FavoriteEntry.TABLE_NAME + " (" +
             MovieContract.FavoriteEntry._ID  + "  INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            MovieContract.FavoriteEntry.COLUMN_ID  + " TEXT UNIQUE , " +
+            MovieContract.FavoriteEntry.COLUMN_ID  + " INTEGER UNIQUE , " +
             MovieContract.FavoriteEntry.COLUMN_RELEASEDATE  + " TEXT NOT NULL, " +
             MovieContract.FavoriteEntry.COLUMN_TITLE  + " TEXT NOT NULL, " +
             MovieContract.FavoriteEntry.COLUMN_VOTEAVERAGE  + " TEXT NOT NULL, " +
@@ -53,13 +53,12 @@ public class MovieDBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(MovieContract.FavoriteEntry.COLUMN_ID, movies.getId());
-        values.put(MovieContract.FavoriteEntry.COLUMN_POSTER, movies.getPoster_path());
-        values.put(MovieContract.FavoriteEntry.COLUMN_OVERVIEW, movies.getOverview());
-
         values.put(MovieContract.FavoriteEntry.COLUMN_RELEASEDATE, movies.getRelease_date());
         values.put(MovieContract.FavoriteEntry.COLUMN_TITLE, movies.getOriginal_title());
-        values.put(MovieContract.FavoriteEntry.COLUMN_BACKDROP, movies.getBackdrop_path());
         values.put(MovieContract.FavoriteEntry.COLUMN_VOTEAVERAGE, movies.getVote_average());
+        values.put(MovieContract.FavoriteEntry.COLUMN_OVERVIEW, movies.getOverview());
+        values.put(MovieContract.FavoriteEntry.COLUMN_POSTER, movies.getPoster_path());
+        values.put(MovieContract.FavoriteEntry.COLUMN_BACKDROP, movies.getBackdrop_path());
 
         return values;
     }

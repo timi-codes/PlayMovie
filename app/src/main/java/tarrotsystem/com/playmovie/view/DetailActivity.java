@@ -79,13 +79,14 @@ public class DetailActivity extends AppCompatActivity {
         setUpTabLayout();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void inflateData() {
         Intent intent=getIntent();
 
         if (intent.hasExtra(getString(R.string.movie))){
              movies = intent.getParcelableExtra(getString(R.string.movie));
 
-            genre.setText(Utils.genreName(movies.getGenre_ids()));
+           // genre.setText(Utils.genreName(movies.getGenre_ids()));
             title.setText(movies.getOriginal_title());
 
 
@@ -101,6 +102,10 @@ public class DetailActivity extends AppCompatActivity {
                     .centerCrop()
                     .into(backDrop);
 
+            if (movies.isFavorite())mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_favorite_bold));
+
+
+
             mFavoriteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,17 +113,18 @@ public class DetailActivity extends AppCompatActivity {
                         getContentResolver().delete(MovieContract.FavoriteEntry.CONTENT_URI.buildUpon().appendPath(String.valueOf(movies.getId())).build(), null, null);
 
                         ViewUtil.showToast(getResources().getString(R.string.removed_favorite),v.getContext());
+                        mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_favorite));
                         movies.setFavorite(false);
+
+
                     }else {
                         ContentValues values = MovieDBHelper.getMovieContentValues(movies);
                         getContentResolver().insert(MovieContract.FavoriteEntry.CONTENT_URI, values);
 
                         ViewUtil.showToast(getResources().getString(R.string.added_favorite),v.getContext());
+                        mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_favorite_bold));
                         movies.setFavorite(true);
                     }
-
-                    isFavoriteChanged = true;
-                    mFavoriteButton.setSelected(movies.isFavorite());
                 }
             });
         }

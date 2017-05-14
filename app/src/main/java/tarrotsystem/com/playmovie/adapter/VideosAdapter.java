@@ -28,8 +28,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.VideosView
     private List<Trailer> mFeedList;
     private Context mContext;
 
-    public VideosAdapter(List<Trailer> feedList, Context context) {
-        this.mFeedList = feedList;
+    public VideosAdapter(Context context) {
         this.mContext = context;
     }
 
@@ -37,6 +36,11 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.VideosView
     public VideosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(), R.layout.item_video, null);
         return new VideosViewHolder(view);
+    }
+
+    public void setVideolistData(List<Trailer> feedList){
+        this.mFeedList = feedList;
+        notifyDataSetChanged();
     }
 
     @Override

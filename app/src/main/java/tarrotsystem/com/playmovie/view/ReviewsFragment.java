@@ -113,7 +113,7 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
     }
 
     private void initAdapter(List<MovieReviews> movieVideos) {
-        videosAdapter = new ReviewsAdapter(movieVideos,getContext());
+        videosAdapter = new ReviewsAdapter(getContext());
         recyclerView.setAdapter(videosAdapter);
     }
 
@@ -158,7 +158,7 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
     public void onLoadFinished(android.support.v4.content.Loader<List<MovieReviews>> loader, List<MovieReviews> data) {
         //mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (data!=null){
-            videosAdapter = new ReviewsAdapter(data,getContext());
+            videosAdapter.setReviewlistData(data);
         }else{
             showNoReviews(true);
         }

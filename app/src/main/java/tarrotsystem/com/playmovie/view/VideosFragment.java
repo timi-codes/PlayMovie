@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,7 +112,7 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
     }
 
     private void initAdapter(List<Trailer> movieVideos) {
-        videosAdapter = new VideosAdapter(movieVideos,getContext());
+        videosAdapter = new VideosAdapter(getContext());
         videosAdapter.setCallbacks(this);
         recyclerView.setAdapter(videosAdapter);
     }
@@ -155,8 +156,9 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<Trailer>> loader, List<Trailer> data) {
         //mLoadingIndicator.setVisibility(View.INVISIBLE);
-        videosAdapter = new VideosAdapter(data,getContext());
+        Log.d("VIDEO",data.get(0).getKey());
 
+        videosAdapter.setVideolistData(data);
     }
 
     @Override
