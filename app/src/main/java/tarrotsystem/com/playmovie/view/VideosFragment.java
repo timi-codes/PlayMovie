@@ -40,7 +40,7 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
     private static final int REQ_START_STANDALONE_PLAYER = 1;
     private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
 
-    @BindView(R.id.videoView)
+    //@BindView(R.id.videoView)
     RecyclerView recyclerView;
 
     private GridLayoutManager gridLayoutManager;
@@ -100,6 +100,7 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
 
         int columnCount = 3;
 
+        recyclerView = (RecyclerView)view.findViewById(R.id.videoView);
         gridLayoutManager = new GridLayoutManager(getActivity(), columnCount);
         int spacing = Utils.dpToPx(5, getActivity()); // 50px
         boolean includeEdge = false;

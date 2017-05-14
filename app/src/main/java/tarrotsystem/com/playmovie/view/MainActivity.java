@@ -37,20 +37,20 @@ import static tarrotsystem.com.playmovie.database.MovieContract.FavoriteEntry.CO
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickListener,
         LoaderManager.LoaderCallbacks<List<JSONObjectUtil.Movies>>{
 
-    @BindView(R.id.toolbar)
+  /*  @BindView(R.id.toolbar)*/
     Toolbar mToolBar;
 
-    @BindView(R.id.progressBar)
+    /*@BindView(R.id.progressBar)
     ProgressBar mProgressBar;
-
+*/
     @BindView(R.id.linearLayout)
     LinearLayout container;
 
 
-    @BindView(R.id.rv_list)
+    //@BindView(R.id.rv_list)
     RecyclerView movie_list;
 
-    @BindView(R.id.empty_list)
+   // @BindView(R.id.empty_list)
     TextView empty_view;
 
     private Snackbar snackbar;
@@ -64,7 +64,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        empty_view = (TextView) findViewById(R.id.empty_list);
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        movie_list = (RecyclerView) findViewById(R.id.rv_list) ;
         setSupportActionBar(mToolBar);
         getSupportActionBar().setElevation(3.0f);
 
@@ -164,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             @Override
             protected void onStartLoading() {
                 super.onStartLoading();
-                mProgressBar.setVisibility(View.VISIBLE);
+                //mProgressBar.setVisibility(View.VISIBLE);
                 forceLoad();
             }
             @Override
@@ -198,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public void onLoadFinished(Loader<List<JSONObjectUtil.Movies>> loader, List<JSONObjectUtil.Movies> moviedata) {
-        mProgressBar.setVisibility(View.INVISIBLE);
+        //mProgressBar.setVisibility(View.INVISIBLE);
         if (moviedata != null) {
             movieAdapter.setMovieData(moviedata);
         } else {

@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import tarrotsystem.com.playmovie.utilities.JSONObjectUtil;
 import tarrotsystem.com.playmovie.view.OverviewFragment;
+import tarrotsystem.com.playmovie.view.ReviewsFragment;
+import tarrotsystem.com.playmovie.view.VideosFragment;
 
 /**
  * Created by DOTECH on 12/05/2017.
@@ -35,9 +37,9 @@ public class TabLayoutAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return OverviewFragment.newInstance(movies);
             case 1:
-                return OverviewFragment.newInstance(movies);
+                return VideosFragment.newInstance(movies);
             case 2:
-                return OverviewFragment.newInstance(movies);
+                return ReviewsFragment.newInstance(movies);
         }
         return null;
     }
