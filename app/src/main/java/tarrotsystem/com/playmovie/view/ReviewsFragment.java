@@ -40,8 +40,6 @@ import static tarrotsystem.com.playmovie.utilities.NetworkUtils.TAG_MOVIES;
 
 
 public class ReviewsFragment extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<List<MovieReviews>> {
-
-    //@BindView(R.id.videoView)
     RecyclerView recyclerView;
 
 
@@ -100,11 +98,8 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        int columnCount = 3;
-
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        int spacing = Utils.dpToPx(5, getActivity()); // 50px
         recyclerView.setLayoutManager(linearLayoutManager);
 
         initAdapter(movieReviews);
@@ -124,7 +119,6 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
             @Override
             protected void onStartLoading() {
                 super.onStartLoading();
-                //mProgressBar.setVisibility(View.VISIBLE);
                 forceLoad();
             }
             @Override
@@ -154,7 +148,6 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<MovieReviews>> loader, List<MovieReviews> data) {
-        //mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (data!=null){
             videosAdapter.setReviewlistData(data);
         }

@@ -57,7 +57,6 @@ public class OverviewFragment extends Fragment {
         ratings = (TextView) view.findViewById(R.id.movieRating);
 
         mRatingBar = (RatingBar) view.findViewById(R.id.ratingBar);
-
         inflateData();
     }
 

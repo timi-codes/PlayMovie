@@ -41,7 +41,6 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
     private static final int REQ_START_STANDALONE_PLAYER = 1;
     private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
 
-    //@BindView(R.id.videoView)
     RecyclerView recyclerView;
 
     private GridLayoutManager gridLayoutManager;
@@ -125,7 +124,6 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
             @Override
             protected void onStartLoading() {
                 super.onStartLoading();
-                //mProgressBar.setVisibility(View.VISIBLE);
                 forceLoad();
             }
             @Override
@@ -155,7 +153,6 @@ public class VideosFragment extends Fragment implements android.support.v4.app.L
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<Trailer>> loader, List<Trailer> data) {
-        //mLoadingIndicator.setVisibility(View.INVISIBLE);
         Log.d("VIDEO",data.get(0).getKey());
 
         videosAdapter.setVideolistData(data);
