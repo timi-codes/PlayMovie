@@ -2,12 +2,18 @@ package tarrotsystem.com.playmovie.view;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -48,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @BindView(R.id.backdrop)
     ImageView backDrop;
+
     @BindView(R.id.favButton)
     FloatingActionButton mFavoriteButton;
 
@@ -57,9 +64,10 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
 
-    private TabLayoutAdapter mTabLayoutAdapter;
+    @BindView(R.id.appbarLayout)
+    AppBarLayout appBarLayout;
 
-    private boolean isFavoriteChanged = false;
+    private TabLayoutAdapter mTabLayoutAdapter;
 
     private JSONObjectUtil.Movies movies;
 
@@ -72,21 +80,24 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         inflateData();
         setUpTabLayout();
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void inflateData() {
         Intent intent=getIntent();
 
         if (intent.hasExtra(getString(R.string.movie))){
-             movies = intent.getParcelableExtra(getString(R.string.movie));
 
-           // genre.setText(Utils.genreName(movies.getGenre_ids()));
+            movies = intent.getParcelableExtra(getString(R.string.movie));
+
+            genre.setText(Utils.genreName(movies.getGenre_ids()));
             title.setText(movies.getOriginal_title());
 
 
@@ -103,7 +114,6 @@ public class DetailActivity extends AppCompatActivity {
                     .into(backDrop);
 
             if (movies.isFavorite())mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_favorite_bold));
-
 
 
             mFavoriteButton.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +137,34 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener(){
+
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onExpanded(AppBarLayout appBarLayout) {
+                    setActivityTitle("");
+                    mFavoriteButton.show();
+                    final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_arrow);
+                    upArrow.setTint(Color.WHITE);
+                    getSupportActionBar().setHomeAsUpIndicator(upArrow);
+                }
+
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onCollapsed(AppBarLayout appBarLayout) {
+                    setActivityTitle(movies.getOriginal_title());
+                    final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_arrow);
+                    upArrow.setTint(getResources().getColor(R.color.colorAccent));
+                    getSupportActionBar().setHomeAsUpIndicator(upArrow);
+                    mFavoriteButton.hide();
+                }
+
+                @Override
+                public void onIdle(AppBarLayout appBarLayout) {
+
+                }
+            });
         }
     }
 
@@ -138,6 +176,13 @@ public class DetailActivity extends AppCompatActivity {
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorHeight(Utils.dpToPx(3,getApplicationContext()));
         tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    public void setActivityTitle(String title) {
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null){
+            toolbar.setTitle(title);
+        }
     }
 
 

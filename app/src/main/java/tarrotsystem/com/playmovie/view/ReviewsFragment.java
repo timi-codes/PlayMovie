@@ -51,8 +51,6 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
     private JSONObjectUtil.Movies movies;
     private final int REVIEW_ID = 202;
     private Bundle savedInstanceState;
-    private View noReviewsView;
-
 
 
 
@@ -159,10 +157,7 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
         //mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (data!=null){
             videosAdapter.setReviewlistData(data);
-        }else{
-            showNoReviews(true);
         }
-
     }
 
     @Override
@@ -170,12 +165,4 @@ public class ReviewsFragment extends Fragment implements android.support.v4.app.
 
     }
 
-    private void showNoReviews(boolean value){
-
-        int noReviewsVisibility = value? View.VISIBLE : View.GONE;
-        noReviewsView.setVisibility(noReviewsVisibility);
-
-        int recyclerViewVisibility = value? View.GONE : View.VISIBLE;
-        recyclerView.setVisibility(recyclerViewVisibility);
-    }
 }

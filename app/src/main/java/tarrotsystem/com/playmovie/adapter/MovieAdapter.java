@@ -45,7 +45,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Glide.with(mContext)
                 .load(imageUrl)
                 .centerCrop()
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.movie_placeholder)
                 .error(android.R.drawable.stat_notify_error)
                 .into(holder.movieThumbnail);
     }

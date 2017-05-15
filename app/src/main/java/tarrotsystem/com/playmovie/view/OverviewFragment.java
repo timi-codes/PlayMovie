@@ -64,7 +64,9 @@ public class OverviewFragment extends Fragment {
 
     private void inflateData() {
         releaseDate.setText(Utils.formatReleaseDate(movies.getRelease_date()));
+        float rating = (float)Math.round(Double.parseDouble(movies.getVote_average()) * 10) / 10;
         ratings.setText(movies.getVote_average()+"/10");
+        mRatingBar.setRating(rating);
         overview.setText(movies.getOverview());
     }
 }

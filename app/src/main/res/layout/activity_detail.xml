@@ -57,7 +57,9 @@
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/toolbar"
                 app:titleMarginTop="15dp"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/colorAccent"
+                />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

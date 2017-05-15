@@ -28,6 +28,7 @@ public class MovieContract {
         public static final String COLUMN_RELEASEDATE = "releasedate";
         public static final String COLUMN_POSTER = "poster";
         public static final String COLUMN_BACKDROP = "backdrop";
+        public static final String COLUMN_GENRES ="genre";
 
         // create cursor of base type directory for multiple entries
         public static final String CONTENT_DIR_TYPE =

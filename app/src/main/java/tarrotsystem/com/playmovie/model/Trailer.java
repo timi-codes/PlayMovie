@@ -145,9 +145,9 @@ public class Trailer implements Parcelable {
         JSONArray data = object.getJSONArray(RESULT);
         parsedTrailer = new ArrayList<>();
         for (int i = 0; i < data.length(); i++) {
+
             JSONObject trailerdata = (JSONObject) data.get(i);
             trailerresponse = new Trailer();
-
             trailerresponse.setId(trailerdata.getString(ID));
             trailerresponse.setKey(trailerdata.getString(KEY));
             parsedTrailer.add(trailerresponse);
